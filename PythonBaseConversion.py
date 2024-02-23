@@ -1,13 +1,4 @@
 def base_conversion(base10Num, targetBase):
-    workingNumber = base10Num
-    result = []
-    while workingNumber != 0:
-        result.insert(0, workingNumber % targetBase)
-        workingNumber = int(workingNumber / targetBase)
-    print(f"Base 10 input: {base10Num} \n"
-          f"Base {targetBase} result: {result}")
-
-def base_conversion_limited(base10Num, targetBase):
     hex_conversion_dict = {
         0: "0",
         1: "1",
@@ -28,6 +19,8 @@ def base_conversion_limited(base10Num, targetBase):
     }
     workingNumber = base10Num
     result = ""
+    if workingNumber == 0:
+        result = "0"
     while workingNumber != 0:
         hex_converted_result = hex_conversion_dict[workingNumber % targetBase]
         result = hex_converted_result + result
@@ -35,5 +28,12 @@ def base_conversion_limited(base10Num, targetBase):
     print(f"Base 10 input: {base10Num} \n"
           f"Base {targetBase} result: {result}")
 
+userNumInput = input("Input a non-negative base 10 number: ")
+while not (userNumInput.isdigit()) or int(userNumInput) < 0:
+    userNumInput = input("Please input a non-negative number: ")
 
-base_conversion_limited(4600, 13)
+userBaseInput = input("Input a base to convert to (2-16): ")
+while not (userBaseInput.isdigit()) or int(userBaseInput) < 2 or int(userBaseInput) > 16:
+    userBaseInput = input("Please input a number between 2 and 16: ")
+
+base_conversion(int(userNumInput), int(userBaseInput))
